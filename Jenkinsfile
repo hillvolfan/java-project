@@ -92,23 +92,23 @@ pipeline {
       post {
         success {
           emailext(
-            subject: "${env.JOB_NAME} [${env.BUILD_NUMBER}] Development promoted to Master!",
-            body: """<p>'${env.JOB_NAME} [${env.BUILD_NUMBER}]' Development promoted to Master!":</p>
+            subject: "${env.JOB_NAME} [${env.BUILD_NUMBER}] Development promoted to !",
+            body: """<p>'${env.JOB_NAME} [${env.BUILD_NUMBER}]' Failed!":</p>
             <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
             to: "hillvolfan@gmail.com"
             )
         }
       }
     }
-    post {
-      failure {
-        emailext(
-          subject: "${env.JOB_NAME} [${env.BUILD_NUMBER}] FAILED!",
-          body: """<p>'${env.JOB_NAME} [${env.BUILD_NUMBER}]' Failed!":</p>
-          <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
-          to: "hillvolfan@gmail.com"
-          )
-      }
+  }
+  post {
+    failure {
+      emailext(
+        subject: "${env.JOB_NAME} [${env.BUILD_NUMBER}] FAILED!",
+        body: """<p>'${env.JOB_NAME} [${env.BUILD_NUMBER}]' Failed!":</p>
+        <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
+        to: "hillvolfan@gmail.com"
+        )
     }
   }
 }
